@@ -52,3 +52,18 @@ ultima_chave = pessoa.popitem()
 print(f'Chave a ser excluída {ultima_chave}')
 print(pessoa,"\n")
 
+print("Método update")
+pessoa.update({
+    'idade' : '22', # O método update tanto pode atualizar uma chave do dicionário
+    'Sobrenome' : 'Franco', # Quanto pode criar uma nova chave para esse mesmo
+    "last_nome" : "Rocha" 
+})
+print(pessoa)
+
+# Outras formas de utilizar o método update
+# pessoa.update(nome = "LUCAS", idade = 21)
+# tupla = (('nome',"Lucas") , ("idade", 22))
+# lista = [["Nome", 'Lucas'], ['idade', 21]]
+
+for chave in pessoa:
+    print("\n",chave, pessoa[chave])
