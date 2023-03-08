@@ -145,7 +145,7 @@ chave = 'Cor do tema'
 pessoa[chave] = 'Azul'
 """
 # Isso vai ser adicionado ao dicionário
-
+'''
 for chave in pessoa:
     print(chave)
 print()
@@ -156,7 +156,39 @@ if pessoa.get("chave") is None:
     print(pessoa[chave])
 else:
     print("Já possui a chave")
+'''
+a = [8,14,2,33,5,6,0,1,6,00,14]
 
+sem_duplicatas = set()
+ordenada = []
+duplis = set()
+duplis2 = []
+first = []
+
+def repetidos(list):
+        for item in list:
+            if item not in sem_duplicatas:
+                ordenada.append(item)
+                sem_duplicatas.add(item)
+
+            else:
+                duplis.add(item)
+                duplis2.append(item)
+        
+        if duplis is None:
+            print(-1)
+
+        else:
+            for num in list:
+                if num in duplis2:
+                    first.append(num)
+        print(first[0])
+
+
+repetidos(a)
+
+# TENTATIVA ATIVIDADE SETS
+# RESOLVER DEPOIS
 
 
 
