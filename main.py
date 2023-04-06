@@ -157,6 +157,8 @@ if pessoa.get("chave") is None:
 else:
     print("Já possui a chave")
 '''
+'''
+
 a = [8,14,2,33,5,6,0,1,6,00,14]
 
 sem_duplicatas = set()
@@ -189,12 +191,22 @@ repetidos(a)
 
 # TENTATIVA ATIVIDADE SETS
 # RESOLVER DEPOIS
+'''
+'''
 
+def cria_matriz(num_linhas, num_colunas):
+    matriz=[]
+    for i in range(num_linhas):
+        linha=[]
+        for j in range(num_colunas):
+            valor_colunas = int(input("NOtas: elemento [" + str(i) + "][" + str(j) + "] >>>"))
+            linha.append(valor_colunas)
+        matriz.append(linha)
+    return matriz
 
-
-
-
-
-
-
-
+cria = cria_matriz(1,3)
+print(cria)
+'''
+m1 = [[1, 2, 3], [4, 5, 6]]
+m2 = [[2, 3, 4], [5, 6, 7]]
+soma_matrizes(m1, m2) => [[3, 5, 7], [9, 11, 13]]
