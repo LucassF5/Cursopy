@@ -207,6 +207,3 @@ def cria_matriz(num_linhas, num_colunas):
 cria = cria_matriz(1,3)
 print(cria)
 '''
-m1 = [[1, 2, 3], [4, 5, 6]]
-m2 = [[2, 3, 4], [5, 6, 7]]
-soma_matrizes(m1, m2) => [[3, 5, 7], [9, 11, 13]]
