@@ -70,26 +70,26 @@ todo = ler([], CAMINHO_ARQUIVO)
 desfazer = []
 
 
-def roda_programa():
-    while True:
-        print('Comandos: listar, desfazer, refazer, clear e sair')
-        nome = input('Digite uma tarefa ou comando:\n>>> ')
-        if nome == 'listar':
-            print()
-            mostra_itens(todo)
+# def roda_programa():
+while True:
+    print('Comandos: listar, desfazer, refazer, clear e sair')
+    nome = input('Digite uma tarefa ou comando:\n>>> ')
+    if nome == 'listar':
+        print()
+        mostra_itens(todo)
 
-        elif nome == 'clear':
-            limpa_tela()
+    elif nome == 'clear':
+        limpa_tela()
 
-        elif nome == 'desfazer':
-            undo(todo)
+    elif nome == 'desfazer':
+        undo(todo)
 
-        elif nome == 'refazer':
-            refazer(todo)
+    elif nome == 'refazer':
+        refazer(todo)
 
-        elif nome == 'sair':
-            break
+    elif nome == 'sair':
+        break
 
-        else:
-            add_word(nome, todo)
-        salvar(tarefas, CAMINHO_ARQUIVO)
+    else:
+        add_word(nome, todo)
+    salvar(todo, CAMINHO_ARQUIVO)
