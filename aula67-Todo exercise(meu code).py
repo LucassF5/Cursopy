@@ -21,7 +21,9 @@ desfazer = []
 
 
 def mostra_itens(lista):
-    print(lista)
+    for itens in lista:
+        print(itens)
+    print()
 
 
 def add_word(nome, lista=None):
@@ -30,34 +32,41 @@ def add_word(nome, lista=None):
     elif nome == 'listar':
         mostra_itens(lista)
     lista.append(nome)
+    print()
     return lista
 
 
 def undo(lista):
     desfazer.append(todo[-1])
     lista.pop()
+    print()
     return lista, desfazer
 
 
 def refazer(lista):
-    lista.append(todo[-1])
+    lista.append(desfazer[-1])
     desfazer.pop()
+    print()
     return lista, desfazer
 
 
 def roda_programa():
     while True:
-        nome = input(">>> ")
+        print('Comandos: listar, desfazer, refazer e clear')
+        nome = input('Digite uma tarefa ou comando:\n>>> ')
         if nome == 'listar':
+            print()
             mostra_itens(todo)
-            print('\n\n')
-            mostra_itens(desfazer)
-        elif nome == 'limpar':
+
+        elif nome == 'clear':
             limpa_tela()
+
         elif nome == 'desfazer':
             undo(todo)
+
         elif nome == 'refazer':
             refazer(todo)
+
         else:
             add_word(nome, todo)
 
