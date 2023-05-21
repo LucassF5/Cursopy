@@ -1,28 +1,5 @@
-# frases = {}
-# frases.update({
-#     "vida" : "mi bida",
-#     "amor" : "mi amor"
-
-# })
-# qtd_vezes_update = int(input("Quantidade de chave-valor inserir: "))
-# for num in range(qtd_vezes_update):
-#     chave = input('Chave\t>>>')
-#     frases[chave] = input("Valor\t>>> ")
-#     print()
-
-# # frases['sobrenome'] = 'Franco'
-
-# for chave in frases:
-#     print(chave,":", frases[chave])
-
-# print("\tO")
-# print("       /|\\")
-# print("       / \\") # Pessoa pra jogo da forca
-
-
 import os
 import time
-
 
 secreto = input("Digite a senha: ")
 print("Memorizou?")
@@ -67,7 +44,7 @@ while True:
     if letra not in secreto:
         chances -= 1
     print("Por favor, tente novamente")
-    print(f'Você tem {chances} chances' )
+    print(f'Você tem {chances} chances')
 
     if chances == 6:
         print()
