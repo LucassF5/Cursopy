@@ -4,6 +4,7 @@ chromedriver
 mysql_206
 .env
 aula207_ola_django/static_files
+.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
