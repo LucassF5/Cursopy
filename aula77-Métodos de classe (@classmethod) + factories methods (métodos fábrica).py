@@ -3,6 +3,9 @@
 # ao invés de receber a instância no primeiro
 # parâmetro, receberemos a própria classe
 
+# P.S: Facroty method é um método que cria um objeto com algo arbitrário(que já foi definido previamente)
+# criar algo com um método que já define valores para os atributos do objeto
+
 class Pessoa:
     ano = 2023  # atributo de classe
 
@@ -15,12 +18,13 @@ class Pessoa:
         print("Olá")
 
     @classmethod
-    def criar_com_50_anos(cls, nome):
+    def criar_com_50_anos(cls, nome):  # vai criar o objeto já com atributo setado
         return cls(nome, 50)
 
     @classmethod
     def criar_sem_nome(cls, idade):
         return cls('Anônima', idade)
+
 # factory method
 # método que cria um objeto com algo arbitrário
 
