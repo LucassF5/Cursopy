@@ -11,6 +11,11 @@
 # - p/ habilitar setter
 # - p/ executar ações ao obter um atributo
 # Código cliente - é o código que usa seu código
+# Código cliente - é o código que vai rodar seu código
+
+# @property - é um método para quem desenvolve a classe
+# mas um atributo para quem usa a classe(o código cliente)
+
 class Caneta:
     def __init__(self, cor):
         self.cor_tinta = cor
