@@ -3,7 +3,7 @@
 # ao invés de receber a instância no primeiro
 # parâmetro, receberemos a própria classe
 
-# P.S: Facroty method é um método que cria um objeto com algo arbitrário(que já foi definido previamente)
+# P.S: Factory method é um método que cria um objeto com algo arbitrário(que já foi definido previamente)
 # criar algo com um método que já define valores para os atributos do objeto
 
 class Pessoa:
