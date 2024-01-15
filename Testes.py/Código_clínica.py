@@ -1,8 +1,60 @@
+"""
+Author: Lucas Franco Rocha
 
+Projeto de um sistema de agendamento de consultas para uma clínica médica
+
+O sistema deve permitir o cadastro de pacientes, com nome e telefone, 
+e o agendamento de consultas, com data, hora e especialidade.
+
+O sistema deve permitir a remoção ou remarcação de consultas agendadas.
+
+Funcionamento do sistema:
+Na tela inicial, o usuário deve escolher entre as opções:
+1 - Cadastrar um paciente
+2 - Marcações de consultas
+3 - Cancelamento de consultas
+4 - Sair
+
+Ao escolher a opção 1, o usuário deve digitar o nome e o telefone do paciente.
+O sistema deve verificar se o telefone já está cadastrado, em caso positivo,
+deve retornar uma mensagem de erro, em caso negativo, deve cadastrar o paciente.
+
+Ao escolher a opção 2, o sistema deve mostrar a lista de pacientes cadastrados
+com o número(index) do paciente e seu nome. Após a escolha do paciente, o sistema
+deve perguntar a data, hora e especialidade da consulta. O sistema deve verificar
+se a data é posterior à data atual e se a data e hora não estão repetidas. Em caso
+positivo, deve guardar os dados na lista de agendamentos.
+
+Ao escolher a opção 3, o sistema deve mostrar a lista de agendamentos com o número(index)
+do paciente, a data, a hora e a especialidade da consulta. Após a escolha do paciente,
+o sistema deve perguntar se o usuário deseja cancelar ou remarcar a consulta. Em caso
+de cancelamento, o sistema deve remover os dados da lista de agendamentos. Em caso de
+remarcação, o sistema deve remover os dados da lista de agendamentos e perguntar a data,
+hora e especialidade da consulta. O sistema deve verificar se a data é posterior à data
+atual e se a data e hora não estão repetidas. Em caso positivo, deve guardar os dados na
+lista de agendamentos.
+
+Ao escolher a opção 4, o sistema deve encerrar.
+"""
 import os
 from datetime import datetime
 
 class Paciente:
+    """
+    Classe que representa um paciente
+
+    Atributos:
+        nome (str): nome do paciente
+        telefone (int): telefone do paciente
+        data (str): data da consulta
+        hora (str): hora da consulta
+        especialidade (str): especialidade da consulta
+
+    Métodos:
+        init: construtor da classe
+        str: retorna uma string com os dados do paciente para o usuário
+        repr: retorna uma string com os dados do paciente para o desenvolvedor.
+    """
     def __init__(self, nome, telefone, data=None, hora=None, especialidade=None):
         self.__nome = nome
         self.__telefone = telefone
@@ -58,6 +110,16 @@ class Paciente:
 
 
 def cadastrar_paciente(pacientes_cadastrados):
+    """
+    Função que cadastra um paciente
+
+    Esta função recebe nome e telefone do paciente e verifica se o telefone já está cadastrado
+    Em caso positivo, retorna uma mensagem de erro
+    Em caso negativo, cadastra o paciente na lista de pacientes cadastrados
+
+    Args:
+        pacientes_cadastrados (list): lista com os pacientes cadastrados
+    """
     repetido = False
     nome = input("\nDigite o nome do paciente: ")
     telefone = int(input("Digite o telefone do paciente(ex:40028922):>>> "))
@@ -78,17 +140,39 @@ def cadastrar_paciente(pacientes_cadastrados):
         print(f"\nPaciente cadastrado com sucesso")
 
 def mostra_paciente_enumerado(pacientes_cadastrados):
+    """
+    Função que mostra os pacientes cadastrados
+
+    Esta função recebe a lista de pacientes cadastrados e apresenta o resultado
+    da iteração na lista com o número(index) do paciente e seu nome.
+    """
     for index, paciente in enumerate(pacientes_cadastrados):
         print(f"Número: {index} - Nome: {paciente.nome}")
 
 def mostra_agendamentos(paciente, agendamentos):
+    """
+    Função que mostra os agendamentos
+    Esta função recebe a lista de pacientes cadastrados e a lista de agendamentos
+    e apresenta o resultado da iteração na lista de agendamentos com o número(index) do paciente,
+    a data, a hora e a especialidade da consulta.
+    """
     for index, paciente in enumerate(agendamentos):
         print(f"Número: {index} - Data: {paciente.data} - Hora: {paciente.hora} - Especialidade: {paciente.especialidade}")
 
 def limpa_tela():
+    """
+    Função que limpa a tela do terminal, facilitando a visualização do usuário
+    """
     os.system("cls")
 
 def marca_consulta(pacientes_cadastrados, agendamentos):
+    """
+    Função que marca uma consulta
+    Esta função recebe a lista de pacientes cadastrados e a lista de agendamentos
+    e apresenta o resultado da iteração na lista de pacientes cadastrados com o número(index) do paciente
+    e seu nome. Após a escolha do paciente, a função chama a função dados_agendamento
+    que recebe o paciente escolhido e a lista de agendamentos.
+    """
     escolha_paciente = int(input("\nDigite o número do paciente que deseja marcar uma consulta:>>> "))
     paciente_escolhido = pacientes_cadastrados[escolha_paciente]
     print(f"\nVocê escolheu o paciente {paciente_escolhido.nome}")
@@ -96,6 +180,17 @@ def marca_consulta(pacientes_cadastrados, agendamentos):
     dados_agendamento(paciente_escolhido,agendamentos)
 
 def dados_agendamento(paciente_escolhido,agendamentos):
+    """
+    Função que guarda os dados do agendamento na lista de agendamentos
+
+    Esta função recebe o paciente escolhido e a lista de agendamentos
+    e apresenta faz a verificação da data e hora da consulta, se a data é posterior à data atual
+    e se a data e hora não estão repetidas. Em caso positivo, guarda os dados na lista de agendamentos.
+
+    Args:
+        paciente_escolhido (Paciente): paciente escolhido para o agendamento
+        agendamentos (list): lista de agendamentos
+    """
     repetido = False
     data_atual = datetime.now()
 
@@ -129,6 +224,20 @@ def dados_agendamento(paciente_escolhido,agendamentos):
         print("A data inserida é anterior à data atual e é inválida.")
 
 def remarcacao():
+    """
+    Função que remaneja/cancela uma consulta
+    Esta função recebe a lista de agendamentos e apresenta o resultado da iteração na lista de agendamentos
+    com o número(index) do paciente, a data, a hora e a especialidade da consulta. Após a escolha do paciente,
+    a função chama a função remarcar que recebe a lista de agendamentos e o paciente escolhido.
+
+    Esta função também permite o cancelamento de uma consulta, caso o usuário escolha a opção 1.
+
+    Caso o usuário escolha a opção 2, a função chama a função dados_agendamento que recebe o paciente escolhido
+    e a lista de agendamentos. Fazendo com que o paciente possa alterar a data, hora e especialidade da consulta.
+
+    Args:
+        agendamentos (list): lista de agendamentos
+    """
     escolha_agendamento = int(input("\nDigite o número do paciente que deseja marcar uma consulta:>>> "))
     paciente_escolhido = agendamentos[escolha_agendamento]
 
@@ -147,10 +256,10 @@ def remarcacao():
         dados_agendamento(paciente_escolhido,agendamentos)
 
 
-pacientes_cadastrados = []
-agendamentos = []
+pacientes_cadastrados = [] # Lista de pacientes cadastrados
+agendamentos = [] # Lista de agendamentos
 
-while True:
+while True: # Loop que mantém o programa em execução
     try:
         print("\nBem vindo(a) ao sistema de agendamento de consultas")
         print("\n1 - Cadastrar um paciente\n2 - Marcações de consultas\n3 - Cancelamento de consultas\n4 - Sair")
