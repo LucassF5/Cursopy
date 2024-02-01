@@ -3,17 +3,21 @@
 # de novas classes. Elas podem forçar outras classes
 # a criarem métodos concretos. Também podem ter
 # métodos concretos por elas mesmas.
+
 # @abstractmethods são métodos que não têm corpo.
 # As regras para classes abstratas com métodos
 # abstratos é que elas NÃO PODEM ser instânciadas
 # diretamente.
+
 # Métodos abstratos DEVEM ser implementados
 # nas subclasses (@abstractmethod).
 # Uma classe abstrata em Python tem sua metaclasse
 # sendo ABCMeta.
+
 # É possível criar @property @setter @classmethod
 # @staticmethod e @method como abstratos, para isso
 # use @abstractmethod como decorator mais interno.
+
 from abc import ABC, abstractmethod
 
 
@@ -22,7 +26,8 @@ class Log(ABC):
     @abstractmethod
     def _log(self, msg): ...
         # raise NotImplementedError('Implemente o método log')
-    # Por ser uma classe abstrata, não é possível instanciá-la, logo não é possível usar o método log
+    # Por ser uma classe abstrata, não é possível instanciá-la,
+    # logo não é possível usar o método log
 
     def log_error(self, msg):
         return self._log(f'Error: {msg}')
