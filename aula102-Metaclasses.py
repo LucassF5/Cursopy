@@ -39,7 +39,7 @@ def meu_repr(self):
 
 
 class Meta(type):
-    def __new__(mcs, name, bases, dct):
+    def __new__(mcs, name, bases, dct): # O método new cria e retorna a classe
         print('METACLASS NEW')
         cls = super().__new__(mcs, name, bases, dct)
         # cls.attr = 1234
@@ -51,7 +51,7 @@ class Meta(type):
 
         return cls
 
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls, *args, **kwargs): # O método call cria e retorna a instância
         instancia = super().__call__(*args, **kwargs)
 
         if 'nome' not in instancia.__dict__:
