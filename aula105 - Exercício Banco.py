@@ -80,7 +80,7 @@ Conta (ABC)
     #     return self.num_conta
 
     @abstractmethod
-    def sacar(self, valor: int | float):
+    def sacar(self, valor):
         if valor > self.saldo or valor < 0:
             print(f"Não pode sacar um valor maior")
             return self.saldo
@@ -89,12 +89,15 @@ Conta (ABC)
         self.__saldo -= valor
         return self.__saldo
 
-    def depositar(self, valor: int | float) -> float:
+    def depositar(self, valor) -> float:
         if valor < 0:
             return self.__saldo
 
         self.__saldo += valor
         print(f"{valor} contos depositados")
+        return self.__saldo
+    
+    def limite(self):
         return self.__saldo
 
 
@@ -102,19 +105,16 @@ class ContaPoupanca(Conta):
     def __init__(self, agencia=123, num_conta=321, saldo=0):
         super().__init__(agencia, num_conta, saldo)
 
+    def limite(self):
+        return self.saldo * 1.5
+
     def sacar(self, valor):
-        if valor < 0:
-            print("Poibido sacar valor menor que 0")
-            return self.__saldo
-
-        elif valor > self.saldo * 1.5:
-            print("Valor maior que o limite")
-            return self.__saldo
-
-        print(f"Você tem um limite restante de {
-              self.saldo*1.5 - self.saldo} e sacou {valor}")
-        self.saldo -= valor
-        return self.saldo
+        if valor > 0 and valor <= self.limite():
+            self.saldo -= valor
+            # print("Saque bem sucedido!")
+            return self.saldo
+        
+        print(f"Valor {valor} inválido ou sem limite")
     
     def __repr__(self) -> str:
         return f"ContaPoupanca(agencia={self.agencia}, num_conta={self.num_conta}, saldo={self.saldo})"
@@ -160,7 +160,7 @@ class Pessoa(ABC):
     
     @property
     def idade(self):
-        return self.idade
+        return self._idade
 
     @idade.setter
     def idade(self, nova_idade):
@@ -174,4 +174,12 @@ class Cliente(Pessoa):
 
     def __repr__(self) -> str:
         return f"Cliente(nome={self.nome}, idade={self.idade}, conta={self.conta})"
+    
+    # def sacar(self, valor):
+    #     return self.conta.sacar(valor)
 
+c = Cliente("Lucas", 20, ContaPoupanca())
+print(c)
+print(c.conta.depositar(100))
+print(c.conta.sacar(200))
+# print(c.conta.saldo)
