@@ -83,9 +83,11 @@ Conta (ABC)
     def sacar(self, valor):
         if valor > self.saldo or valor < 0:
             print(f"Não pode sacar um valor maior")
+            print("MÉTODO PAI")
             return self.saldo
 
         print(f"Você sacou {valor} contos")
+        print("MÉTODO PAI")
         self.__saldo -= valor
         return self.__saldo
 
@@ -94,7 +96,7 @@ Conta (ABC)
             return self.__saldo
 
         self.__saldo += valor
-        print(f"{valor} contos depositados")
+        # print(f"{valor} contos depositados")
         return self.__saldo
     
     def limite(self):
@@ -111,10 +113,12 @@ class ContaPoupanca(Conta):
     def sacar(self, valor):
         if valor > 0 and valor <= self.limite():
             self.saldo -= valor
-            # print("Saque bem sucedido!")
+            # print("MÉTODO FILHO")
+            print("Saque bem sucedido!")
             return self.saldo
-        
-        print(f"Valor {valor} inválido ou sem limite")
+        # print("MÉTODO FILHO")
+        # print(f"Valor {valor} inválido ou sem limite")
+        return self.saldo
     
     def __repr__(self) -> str:
         return f"ContaPoupanca(agencia={self.agencia}, num_conta={self.num_conta}, saldo={self.saldo})"
@@ -178,8 +182,25 @@ class Cliente(Pessoa):
     # def sacar(self, valor):
     #     return self.conta.sacar(valor)
 
-c = Cliente("Lucas", 20, ContaPoupanca())
-print(c)
-print(c.conta.depositar(100))
-print(c.conta.sacar(200))
-# print(c.conta.saldo)
+class Banco():
+
+    """
+    Banco
+        Banco -> Cliente
+        Banco -> Conta
+
+    Dicas:
+
+
+    Criar classe Banco para AGREGAR classes de clientes e de contas (Agregação)
+    Banco será responsável autenticar o cliente e as contas da seguinte maneira:
+        Banco tem contas e clentes (Agregação)
+        * Checar se a agência é daquele banco
+        * Checar se o cliente é daquele banco
+        * Checar se a conta é daquele banco
+    Só será possível sacar se passar na autenticação do banco (descrita acima)
+    Banco autentica por um método.
+    """
+    
+    def __init__(self) -> None:
+        pass
