@@ -107,7 +107,7 @@ class ContaPoupanca(Conta):
 
 
     def sacar(self, valor: float) -> float:
-        if valor > 0 and valor <= self.limite():
+        if valor > 0:
             self.saldo -= valor
             # print("MÉTODO FILHO")
             print("Saque bem sucedido!")
@@ -139,7 +139,7 @@ class ContaCorrente(Conta):
         return f"ContaCorrente(agencia={self.agencia}, num_conta={self.num_conta}, saldo={self.saldo})"
     
 
-class Pessoa(ABC):
+class Pessoa():
 
     # Pessoa (ABC)
     #       Cliente
