@@ -54,7 +54,7 @@ Conta (ABC)
             Contas devem ter método para depósito
     """
 
-    def __init__(self, agencia, num_conta, saldo=0):
+    def __init__(self, agencia:int, num_conta:int, saldo:float=0):
         self._agencia = agencia
         self.num_conta = num_conta
         self.__saldo = saldo
@@ -98,19 +98,15 @@ Conta (ABC)
         self.__saldo += valor
         # print(f"{valor} contos depositados")
         return self.__saldo
-    
-    def limite(self):
-        return self.__saldo
+
 
 
 class ContaPoupanca(Conta):
-    def __init__(self, agencia=123, num_conta=321, saldo=0):
+    def __init__(self, agencia=123, num_conta=321, saldo=0) -> None:
         super().__init__(agencia, num_conta, saldo)
 
-    def limite(self):
-        return self.saldo * 1.5
 
-    def sacar(self, valor):
+    def sacar(self, valor: float) -> float:
         if valor > 0 and valor <= self.limite():
             self.saldo -= valor
             # print("MÉTODO FILHO")
@@ -125,16 +121,18 @@ class ContaPoupanca(Conta):
 
 
 class ContaCorrente(Conta):
-    def __init__(self, agencia=1010, num_conta=2020, saldo=0):
+    def __init__(self, agencia=1010, num_conta=2020, saldo=0, limite:float=100) -> None:
         super().__init__(agencia, num_conta, saldo)
+        self.limite = limite
 
-    def sacar(self, novo_valor:  int|float):
-        if self.saldo >= novo_valor > 0:
+    def sacar(self, novo_valor:  float) -> float:
+        if  0 < novo_valor <= self.limite:
            self.saldo -= novo_valor
-           print(f"{novo_valor} sacados")
+           print(f"{novo_valor} sacados, limite restante {self.limite - novo_valor}")
            return self.saldo
             
         print(f"Valor {novo_valor} inválido") 
+        return self.saldo
      
 
     def __repr__(self) -> str:
@@ -159,20 +157,20 @@ class Pessoa(ABC):
         return self._nome
     
     @nome.setter
-    def nome(self, novo_nome):
-        self._nome = novo_nome
+    def nome(self, nome: str):
+        self._nome = nome
     
     @property
     def idade(self):
         return self._idade
 
     @idade.setter
-    def idade(self, nova_idade):
-        self.idade = nova_idade
+    def idade(self, idade:int):
+        self.idade = idade
 
 
 class Cliente(Pessoa):
-    def __init__(self, nome, idade, conta: Conta):
+    def __init__(self, nome, idade, conta: Conta) -> None:
         super().__init__(nome, idade)
         self.conta = conta
 
@@ -204,3 +202,8 @@ class Banco():
     
     def __init__(self) -> None:
         pass
+
+
+c = ContaCorrente()
+c.depositar(100)
+c.sacar(50)
